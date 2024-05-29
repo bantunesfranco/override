@@ -1,76 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int verify_user_name(char *str)
 {
-	char *username = "dat_wil";
-
 	puts("verifying username....\n");
-
-	// if (strcmp(username, str) == 0)
-	// 	return (0);
-	// else
-	// 	return (1);
-
-	int i = 0;
-	for (i; str[i] != '\0' && i < 7; ++i)
-	{
-		if (username[i] != str[i])
-			return (username[i] - str[i]);
-	}
-	return (username[i] - str[i]);
-
+	return (strncmp("dat_wil", str, 7)); // 0x7
 }
 
-int verify_pass(char *str)
+int verify_user_pass(char *str)
 {
-	char *pass = "dat_wil";
-
-	puts("verifying pass....\n");
-
-	// if (strcmp(pass, str) == 0)
-	// 	return (0);
-	// else
-	// 	return (1);
-
-	int i = 0;
-	for (i; str[i] != '\0' && i < 7; ++i)
-	{
-		if (pass[i] != str[i])
-			return (pass[i] - str[i]);
-	}
-	return (pass[i] - str[i]);
-
+	return (strncmp("admin", str, 5)); // 0x5
 }
 
 int main(void)
 {
-	char	str[96];
-
-	for (int i = 0; i < 16; ++i)
-		str[i] = 0;
+	char	str[16];
+	bzero(str, 16);
 	
 	puts("********* ADMIN LOGIN PROMPT *********");
 	printf("Enter Username: ");
-	fgets(str, 256, stdin);
+	fgets(str, 256, stdin); // 0x100
 
-	if (verify_user_name(str) == 0)
-	{
-		puts("Enter Password: ");
-		fgets(str, 100, stdin);
-	
-		if (verify_pass(str) == 0)
-			return (0);
-		else
-		{
-			puts("nope, incorrect password...\n");
-			return (1);
-		}
-		return (0);
-	}
-	else
+	if (verify_user_name(str) != 0)
 	{
 		puts("nope, incorrect username...\n");
 		return (1);
 	}
+
+	puts("Enter Password: ");
+	fgets(str, 100, stdin); // 0x64
+
+	int ret = verify_user_pass(str);
+	if (ret == 0)
+	{
+		puts("nope, incorrect password...\n");
+		return (1);
+	}
+
+	if (ret == 0)
+		return (0);
 }
+
+// get eip after return from pass verification 0xffffd71c
+
+// find system function address 0xf7e6aed0
+// find exit function address 0xf7e5eb70
+// find string "/bin/sh" address 0xf7f897ec
+
+// calculate offset password buffer to eip 
