@@ -3,9 +3,9 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
-	char buffer1[100];	// 0x70
+	char buffer1[112];	// 0x70
 	char buffer2[48];	// 0x20
-	char buffer3[100];	// 0x110
+	char buffer3[112];	// 0x110
 	FILE *file = NULL;
 	int ac = argc;
 	char **av = argv;
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 	puts("===== [ Secure Access System v1.0 ] =====");
 	puts("/***************************************\\");
 	puts("| You must login to access this system. |");
-	puts("\\***************************************/");
+	puts("\\**************************************/");
 
 	printf("--[ Username: ");
 	fgets(buffer1, 100, stdin);
