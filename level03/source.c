@@ -2,8 +2,32 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 
-void decrypt(int value)
+void	clear_stdin(void)
+{
+	char	c = 0;
+
+	while (c != '\n' && c != 0xFF)
+		c = getchar();
+}
+
+int	get_unum(void)
+{
+	unsigned int	value = 0;
+
+	fflush(stdout);
+	scanf("%u", &value);
+	clear_stdin();
+	return value;
+}
+
+void	prog_timeout(void)
+{
+	_exit(1);
+}
+
+void	decrypt(int value)
 {
 	char	str[17] = "Q}|u`sfg~sf{}|a3";
 
@@ -17,34 +41,14 @@ void decrypt(int value)
 		puts("\nInvalid Password");
 }
 
-
-void test(int input, int pwd)
+void	test(int input, int pwd)
 {
-	int diff = pwd - input;
+	int	diff = pwd - input;
 
-	switch (diff) // jmp diff
-	{
-		case 0x1:
-		case 0x2:
-		case 0x3:
-		case 0x4:
-		case 0x5:
-		case 0x6:
-		case 0x7:
-		case 0x8:
-		case 0x9:
-		case 0x10:
-		case 0x11:
-		case 0x12:
-		case 0x13:
-		case 0x14:
-		case 0x15: // 21
-			decrypt(diff);
-			break;
-		default:
-			decrypt(rand());
-			break;
-	}
+	if (diff > 21) // 
+		decrypt(rand());
+	else
+		decrypt(diff);
 }
 
 int	main(void)
