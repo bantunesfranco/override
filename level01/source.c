@@ -16,7 +16,7 @@ int verify_user_pass(char *str)
 int main(void)
 {
 	char	str[16];
-	bzero(str, 16);
+	memset(str, 0, 16);
 	
 	puts("********* ADMIN LOGIN PROMPT *********");
 	printf("Enter Username: ");
