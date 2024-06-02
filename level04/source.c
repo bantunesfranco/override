@@ -81,7 +81,7 @@ int	main(void)
 
 // 0xffffd71c eip
 // 0xffffd680 input
-// 156 diff 0xffffd71c
+// 156 diff
 
 // 0xf7e6aed0 system
 // 0xf7f897ec exit
