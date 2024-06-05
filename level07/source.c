@@ -110,7 +110,9 @@ int main(int argc, char **argv, char **envp)
 	return 0;
 }
 
-// eip 0xffffd71c
+// eip 0xffffd71c --->  1073741938 overfllow index 114
 // buff 0xffffd6e8
-// diffchar 114 
 
+// 0xf7e6aed0 4159090384 system
+// 0xf7e5eb70 4159040368 exit
+// 0xf7f897ed 4160264172 /bin/sh
