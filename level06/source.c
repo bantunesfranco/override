@@ -2,6 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ptrace.h>
+#include <signal.h>
+
+void	clear_stdin(void)
+{
+	char	c = 0;
+
+	while (c != '\n' && c != 0xFF)
+		c = getchar();
+}
+
+int	get_unum(void)
+{
+	unsigned int	value = 0;
+
+	fflush(stdout);
+	scanf("%u", &value);
+	clear_stdin();
+	return value;
+}
+
+void	prog_timeout(void)
+{
+	_exit(1);
+}
+
+void	enable_timeout_cons(void)
+{
+	signal(SIGALRM, prog_timeout); // 0xe
+	alarm(60); // 0x3c
+}
 
 int auth(char *login, unsigned int serial)
 {
