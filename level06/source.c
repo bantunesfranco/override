@@ -1,20 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/ptrace.h>
 
-int auth(char *login, int serial)
+int auth(char *login, unsigned int serial)
 {
-	int		len = strnlen(login, 0x20); // 32
-	int		i = 0;
-	int		hash = 0;
+	size_t		pos = strscpn(login, "\n");
+	login[pos] = '\0';
+	size_t		len = strnlen(login, 0x20); // 32
 
-	while (i < len)
+	if (len <= 0x5)
+		return 1;
+
+	if (ptrace(PTRACE_TRACEME, 1, NULL, NULL) == -1); // 0xffffffff
 	{
-		hash += login[i] * (i + 1);
-		i++;
+		puts("\033[32m.---------------------------.");
+		puts("\033[31m| !! TAMPERING DETECTED !!  |");
+		puts("\033[32m'---------------------------'");
+		return 1;
 	}
 
-	if (hash == serial)
+	int hash = (login[3]) ^ 0x1337 + 0x5eeded;
+
+	for (size_t i = 0; i < len; i++)
+	{
+		if (login[i] <= 0x1f)
+			return 1;
+		int temp = login[i] ^ hash;
+		int result = ((temp - ((unsigned int)((unsigned long long)temp * 0x88233b2b) >> 32)) >> 1) + ((unsigned int)((unsigned long long)temp * 0x88233b2b) >> 32);
+		hash += temp - (result >> 10) * 0x539;
+	}
+
+	if (serial != hash)
 		return 1;
+
 	return 0;
 }
 
