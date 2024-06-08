@@ -12,7 +12,7 @@ void	clear_stdin(void)
 		c = getchar();
 }
 
-int	get_unum(void)
+unsigned int	get_unum(void)
 {
 	unsigned int	value = 0;
 
@@ -33,7 +33,7 @@ void	enable_timeout_cons(void)
 	alarm(60); // 0x3c
 }
 
-int auth(char *login, unsigned int serial)
+int	auth(char *login, unsigned int serial)
 {
 	size_t		pos = strscpn(login, "\n");
 	login[pos] = '\0';
@@ -50,7 +50,7 @@ int auth(char *login, unsigned int serial)
 		return 1;
 	}
 
-	int hash = (login[3]) ^ 0x1337 + 0x5eeded;
+	int	hash = (login[3]) ^ 0x1337 + 0x5eeded;
 
 	for (size_t i = 0; i < len; i++)
 	{

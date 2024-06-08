@@ -12,7 +12,7 @@ void	clear_stdin(void)
 		c = getchar();
 }
 
-int	get_unum(void)
+unsigned int	get_unum(void)
 {
 	unsigned int	value = 0;
 
@@ -27,11 +27,10 @@ void	prog_timeout(void)
 	_exit(1);
 }
 
-
 int	store_number(unsigned int *data)
 {
-	unsigned int index = 0;
-	unsigned int number = 0;
+	unsigned int	index = 0;
+	unsigned int	number = 0;
 
 	printf(" Number: ");
 	number = get_unum();
@@ -53,7 +52,7 @@ int	store_number(unsigned int *data)
 
 int read_number(unsigned int *data)
 {
-	unsigned int index = 0;
+	unsigned int	index = 0;
 
 	printf(" Index: ");
 	index = get_unum();
@@ -63,12 +62,12 @@ int read_number(unsigned int *data)
 
 int main(int argc, char **argv, char **envp)
 {
-	char **av = argv;
-	char **env = envp;
+	char			**av = argv;
+	char			**env = envp;
 
-	unsigned int arr[100] = {0}; // 0x64
-	char buff[20]; // 0x14
-	int ret = 0;
+	unsigned int	arr[100] = {0}; // 0x64
+	char 			buff[20]; // 0x14
+	int				ret = 0;
 
 	for (int i = 0; av[i]; ++i)
 		memset(av[i], 0, strlen(av[i]));
@@ -109,10 +108,3 @@ int main(int argc, char **argv, char **envp)
 	}
 	return 0;
 }
-
-// eip 0xffffd71c --->  1073741938 overfllow index 114
-// buff 0xffffd6e8
-
-// 0xf7e6aed0 4159090384 system
-// 0xf7e5eb70 4159040368 exit
-// 0xf7f897ed 4160264172 /bin/sh

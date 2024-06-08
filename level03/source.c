@@ -12,7 +12,7 @@ void	clear_stdin(void)
 		c = getchar();
 }
 
-int	get_unum(void)
+unsigned int	get_unum(void)
 {
 	unsigned int	value = 0;
 
@@ -45,7 +45,7 @@ void	test(int input, int pwd)
 {
 	int	diff = pwd - input;
 
-	if (diff > 21) // 
+	if (diff > 21) // 0x15
 		decrypt(rand());
 	else
 		decrypt(diff);

